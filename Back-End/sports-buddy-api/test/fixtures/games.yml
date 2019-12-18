@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  location: MyString
+  time: 2019-12-18
+  score: MyString
+  sport: MyString
+  accepted: false
+  user: one
+
+two:
+  location: MyString
+  time: 2019-12-18
+  score: MyString
+  sport: MyString
+  accepted: false
+  user: two
