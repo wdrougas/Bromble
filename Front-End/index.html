@@ -3,25 +3,28 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-    <link rel="stylesheet" type="text/css" href="css/semantic.min.css">
-    <script
-    src="https://code.jquery.com/jquery-3.1.1.min.js"
-    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-    crossorigin="anonymous"></script>
-    <script src="semantic/dist/semantic.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
   </head>
   <body>
-
+    <div class="root"> <!-- div root -->
+      <!-- DIV CONTAINER -->
+      <div class="ui container">
         <!-- DIV NAVBAR -->
         <div class="ui secondary pointing menu">
           <a class="active item">
             Home
           </a>
           <a class="item">
-            Messages
+            About
           </a>
           <a class="item">
-            Friends
+            Sports
+          </a>
+          <a class="item">
+            Games
+          </a>
+          <a class="item">
+            Games
           </a>
           <div class="right menu">
             <div class="item">
@@ -34,21 +37,27 @@
               Logout
             </a>
           </div>
+        </div> <!-- CLOSING DIV NAVBAR -->
+
+        <h1>Sports Buddy</h1>
+        <button id='login-button' class="ui button" type="button" name="button">Login</button>
+        <button id='signup-button' class="ui button" type="button" name="button">Sign Up</button>
+        <div id='forms-container' class = 'ui container'>
+
         </div>
-        <div class="ui segment">
-          <p></p>
-        </div> 
-        <!-- CLOSING DIV NAVBAR -->    
-    <!-- DIV CONTAINER -->
-    <div class="ui container">
-      <!-- DIV HEADER -->
-      <div class="">
 
-
-     
-      </div> <!-- CLOSING DIV HEADER -->
-      
-
-    </div> <!-- CLOSING DIV HEADER -->
+      </div> <!-- CLOSING DIV CONTAINER -->
+      <!-- footer -->
+      <footer>
+        <div class="ui container">
+          <h1>hello there</h1>
+          <h1>hello there</h1>
+          <h1>hello there</h1>
+          <h1>hello there</h1>
+        </div>
+      </footer>
+      <!-- end footer -->
+    </div> <!-- closing div root -->
+    <script type="text/javascript" src='src/index.js'></script>
   </body>
 </html>
