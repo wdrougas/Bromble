@@ -7,7 +7,6 @@ class UsersController < ApplicationController
 
   def create
     user = User.create(strong_user_params)
-    byebug
     render json: user.to_json(serialized_data)
   end
 
@@ -18,7 +17,7 @@ class UsersController < ApplicationController
   end
 
   def serialized_data
-    {:except => [:created_at, :updated_at]}
+    {:except => [:password_digest, :created_at, :updated_at]}
   end
 
 end
