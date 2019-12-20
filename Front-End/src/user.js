@@ -1,10 +1,10 @@
 function getUserUrl (arguments) {
-  const USER_URL = 'http://localhost:8000/users'
+  const USER_URL = 'http://localhost:3000/users'
   return USER_URL
 }
 
 function getLoginUrl () {
-  const LOGIN_URL = 'http://localhost:8000/login'
+  const LOGIN_URL = 'http://localhost:3000/login'
   return LOGIN_URL
 }
 
@@ -14,6 +14,10 @@ function getHeaders() {
     "Accept": 'application/json'
   }
   return HEADERS
+}
+
+function getButtonContainerEl() {
+  return document.getElementById('button-container')
 }
 
 function getMainContainerEl() {
@@ -71,8 +75,13 @@ function getLocationEl () {
 }
 // sign up form end
 
+// home div
+function getHomeDiv() {
+  return document.getElementById('home')
+}
+
 function login() {
-  getDivForms().innerHTML = ''
+  // getDivForms().innerHTML = ''
   let loginDiv = document.createElement('div')
   loginDiv.innerHTML =
   `<form id='login-form' class='ui form' action='#' method='post'>
@@ -89,8 +98,12 @@ function login() {
   getDivForms().appendChild(loginDiv)
   getLoginForm().addEventListener('submit', function(e) {
     e.preventDefault()
+<<<<<<< HEAD
     console.log(getLoginUsernameEl().value)
     userLogin(getLoginUsernameEl().value, getLoginPasswordEl().value)
+=======
+    userLogin(getLoginUsernameEl().value)
+>>>>>>> 787e9cec0a7911027fb75b95394d72184fd19fe7
   })
 }
 
@@ -172,28 +185,22 @@ function userLogin(username, password_digest) {
   }
   fetch(getLoginUrl(), configOptions)
   .then(response => response.json())
-  .then(data => console.log(data))
+  .then(currentUser => showHomeDiv(currentUser))
   .catch(error => console.log(error.message))
-  // getDivForms().innerHTML = ''
   // getLoginButton().remove()
   // getSignupButton().remove()
   // showHomeDiv()
 }
 
-function confirmLogin(data) {
-  let currentUser;
-  data.forEach(function(user) {
-    if (user.username === getLoginUsernameEl().value) {
-      currentUser = user
-    }
-  })
-  return currentUser
-}
 
-function showHomeDiv() {
-  const homeDiv = document.createElement('div')
-  homeDiv.classList.add('ui', 'container')
+function showHomeDiv(currentUser) {
+  console.log(currentUser.games)
+  getButtonContainerEl().innerHTML = ''
+  getDivForms().innerHTML = ''
   const pTagTest = document.createElement('p')
-  pTagTest.innerText = 'this is a test'
-  getMainContainerEl().append(homeDiv, pTagTest)
+  pTagTest.innerText = `Welcome to Sports Buddy, ${currentUser.first_name}!`
+  getMainContainerEl().append(pTagTest)
+  getHomeDiv().classList.add('ui', 'card')
+  getMainContainerEl().append(getHomeDiv())
+  getHomeDiv().innerText = `${currentUser.first_name}, ${currentUser.last_name}`
 }
