@@ -75,6 +75,11 @@ function getLocationEl () {
 }
 // sign up form end
 
+// home div
+function getHomeDiv() {
+  return document.getElementById('home')
+}
+
 function login() {
   // getDivForms().innerHTML = ''
   let loginDiv = document.createElement('div')
@@ -184,13 +189,13 @@ function userLogin(username, password) {
 
 
 function showHomeDiv(currentUser) {
-  console.log(currentUser.user_games)
+  console.log(currentUser.games)
   getButtonContainerEl().innerHTML = ''
   getDivForms().innerHTML = ''
-  const homeDiv = document.createElement('div')
-  homeDiv.classList.add('ui', 'container')
   const pTagTest = document.createElement('p')
   pTagTest.innerText = `Welcome to Sports Buddy, ${currentUser.first_name}!`
-  getMainContainerEl().append(pTagTest, homeDiv)
-
+  getMainContainerEl().append(pTagTest)
+  getHomeDiv().classList.add('ui', 'card')
+  getMainContainerEl().append(getHomeDiv())
+  getHomeDiv().innerText = `${currentUser.first_name}, ${currentUser.last_name}`
 }
