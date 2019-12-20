@@ -10,6 +10,11 @@ class UsersController < ApplicationController
     render json: user.to_json(serialized_data)
   end
 
+  def show
+    user = User.find(params[:id])
+    render json: user.to_json(serialized_data)
+  end
+
   private
 
   def strong_user_params

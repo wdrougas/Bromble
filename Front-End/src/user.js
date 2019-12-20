@@ -1,3 +1,12 @@
+// let headers = headers: {
+//     "Content-Type": 'application/json',
+//     "Accept": 'application/json'
+//   }
+
+function getMainContainerEl() {
+  return document.querySelector('#main-container');
+}
+
 function getLoginButton() {
   return document.getElementById('login-button')
 }
@@ -14,10 +23,40 @@ function getLoginForm() {
   return document.getElementById('login-form')
 }
 
+function getLoginUsername() {
+  return document.getElementById('login-username')
+}
+
+function getLoginPassword() {
+  return document.getElementById('login-password')
+}
+
+// sign up form
 function getSubmitForm() {
   return document.getElementById('sign-up')
 }
+function getFirstNameEl() {
+  return document.getElementById('first-name-field')
+}
 
+function getLastNameEl() {
+  return document.getElementById('last-name-field')
+}
+
+function getUsernameEl () {
+  return document.getElementById('username-field')
+}
+
+function getPasswordEl () {
+  return document.getElementById('password-field')
+}
+function getEmailEl () {
+  return document.getElementById('email-field')
+}
+function getLocationEl () {
+  return document.getElementById('location-field')
+}
+// sign up form end
 
 function login() {
   getDivForms().innerHTML = ''
@@ -26,19 +65,19 @@ function login() {
   `<form id='login-form' class='ui form' action='#' method='post'>
     <div class='field'>
         <label>Username</label>
-        <input type='text' name='username' placeholder='Username'>
+        <input id='login-username' type='text' name='username' placeholder='Username'>
       </div>
       <div class='field'>
         <label>Password</label>
-        <input type='password' name='password' placeholder='Password'>
+        <input id='login-password' type='password' name='password' placeholder='Password'>
       </div>
       <button id='login-btn' class='ui button' type='submit'>Login</button>
   </form>`
   getDivForms().appendChild(loginDiv)
   getLoginForm().addEventListener('submit', function(e) {
     e.preventDefault()
-    alert("Login Submitted")
-  });
+    userLogin()
+  })
 }
 
 function signUp () {
@@ -48,31 +87,31 @@ function signUp () {
   `<form id='sign-up' class='ui form' action='#' method='post'>
     <div class='field'>
         <label>First Name</label>
-        <input type='text' name='first-name' placeholder='First Name'>
+        <input id="first-name-field" type='text' name='first_name' placeholder='First Name' required>
       </div>
       <div class='field'>
         <label>Last Name</label>
-        <input type='text' name='last-name' placeholder='Last Name'>
+        <input id="last-name-field" type='text' name='last_name' placeholder='Last Name' required>
       </div>
       <div class='field'>
         <label>Username</label>
-        <input type='text' name='user-name' placeholder='Username'>
+        <input id="username-field" type='text' name='username' placeholder='Username'minlength="5" maxlength="10" required>
       </div>
       <div class='field'>
         <label>Password</label>
-        <input type='text' name='password' placeholder='Password'>
+        <input id="password-field" type='password' name="password_digest" placeholder='Password' required>
       </div>
       <div class='field'>
         <label>Email</label>
-        <input type='text' name='email' placeholder='Email'>
+        <input id="email-field" type='email' name='email' placeholder='Email' size="30" required>
       </div>
       <div class='field'>
         <label>Zip Code</label>
-        <input type='text' name='zip-code' placeholder='Zip Code'>
+        <input id="location-field" type='number' name='location' placeholder='Zip Code' max='99999' size="5" required>
       </div>
       <div class='field'>
         <div class='ui checkbox'>
-          <input type='checkbox' tabindex='0' class='hidden'>
+          <input type='checkbox' tabindex='0' class=''>
           <label>I agree to the Terms and Conditions</label>
         </div>
       </div>
@@ -81,6 +120,63 @@ function signUp () {
   getDivForms().appendChild(signUpDiv)
   getSubmitForm().addEventListener('submit', function(e) {
     e.preventDefault()
-    alert("Signup Submitted")
-  });
+    submitUserInfo()
+  })
+}
+
+function submitUserInfo() {
+    let userInfo = {
+      first_name: getFirstNameEl().value,
+      last_name: getLastNameEl().value,
+      username: getUsernameEl().value,
+      password_digest: getPasswordEl().value,
+      email: getEmailEl().value,
+      location: getLocationEl().value
+    }
+    let configOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": 'application/json',
+        "Accept": 'application/json'
+      },
+      body: JSON.stringify(userInfo)
+    }
+    fetch('http://localhost:3000/users', configOptions)
+    .then(response => {
+      if (response.ok) {
+        login()
+      } else {
+        alert("Sign up failed. Please try again")
+      }
+    })
+    .catch(error => console.log(error.message))
+}
+
+function userLogin() {
+  // fetch(`http://localhost:3000/users`)
+  // .then(response => response.json())
+  // .then(data => {return confirmLogin(data)})
+  // .catch(error => console.log(error.message))
+  getDivForms().innerHTML = ''
+  getLoginButton().remove()
+  getSignupButton().remove()
+  showHomeDiv()
+}
+
+function confirmLogin(data) {
+  let currentUser;
+  data.forEach(function(user) {
+    if (user.username === getLoginUsername().value) {
+      currentUser = user
+    }
+  })
+  return currentUser
+}
+
+function showHomeDiv() {
+  const homeDiv = document.createElement('div')
+  homeDiv.classList.add('ui', 'container')
+  const pTagTest = document.createElement('p')
+  pTagTest.innerText = 'this is a test'
+  getMainContainerEl().append(homeDiv, pTagTest)
 }
