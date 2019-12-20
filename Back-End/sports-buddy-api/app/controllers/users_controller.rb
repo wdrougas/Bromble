@@ -17,7 +17,11 @@ class UsersController < ApplicationController
 
   def login
     user = User.find_by(username: params[:username])
-    puts(user)
+    if user
+      render json: user.to_json(serialized_data)
+    else
+      render json: {message: 'user not found'}
+    end
   end
 
   private

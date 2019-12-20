@@ -1,9 +1,19 @@
-const USER_URL = 'http://localhost:8000/users'
-const LOGIN_URL = 'http://localhost:8000/login'
+function getUserUrl (arguments) {
+  const USER_URL = 'http://localhost:8000/users'
+  return USER_URL
+}
 
-const HEADERS = {
-  "Content-Type": 'application/json',
-  "Accept": 'application/json'
+function getLoginUrl () {
+  const LOGIN_URL = 'http://localhost:8000/login'
+  return LOGIN_URL
+}
+
+function getHeaders() {
+  const HEADERS = {
+    "Content-Type": 'application/json',
+    "Accept": 'application/json'
+  }
+  return HEADERS
 }
 
 function getMainContainerEl() {
@@ -26,11 +36,11 @@ function getLoginForm() {
   return document.getElementById('login-form')
 }
 
-function getLoginUsername() {
+function getLoginUsernameEl() {
   return document.getElementById('login-username')
 }
 
-function getLoginPassword() {
+function getLoginPasswordEl() {
   return document.getElementById('login-password')
 }
 
@@ -79,7 +89,8 @@ function login() {
   getDivForms().appendChild(loginDiv)
   getLoginForm().addEventListener('submit', function(e) {
     e.preventDefault()
-    userLogin()
+    console.log(getLoginUsernameEl().value)
+    userLogin(getLoginUsernameEl().value)
   })
 }
 
@@ -138,10 +149,10 @@ function submitUserInfo() {
     }
     let configOptions = {
       method: "POST",
-      headers: HEADERS,
+      headers: getHeaders(),
       body: JSON.stringify(userInfo)
     }
-    fetch(USER_URL, configOptions)
+    fetch(getUserUrl(), configOptions)
     .then(response => {
       if (response.ok) {
         login()
@@ -152,10 +163,16 @@ function submitUserInfo() {
     .catch(error => console.log(error.message))
 }
 
-function userLogin() {
-  fetch(LOGIN_URL)
+function userLogin(username) {
+
+  let configOptions = {
+    method: 'POST',
+    headers: getHeaders(),
+    body: JSON.stringify({username: username})
+  }
+  fetch(getLoginUrl(), configOptions)
   .then(response => response.json())
-  .then(data => {return confirmLogin(data)})
+  .then(data => console.log(data))
   .catch(error => console.log(error.message))
   // getDivForms().innerHTML = ''
   // getLoginButton().remove()
@@ -166,7 +183,7 @@ function userLogin() {
 function confirmLogin(data) {
   let currentUser;
   data.forEach(function(user) {
-    if (user.username === getLoginUsername().value) {
+    if (user.username === getLoginUsernameEl().value) {
       currentUser = user
     }
   })
