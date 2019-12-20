@@ -90,7 +90,7 @@ function login() {
   getLoginForm().addEventListener('submit', function(e) {
     e.preventDefault()
     console.log(getLoginUsernameEl().value)
-    userLogin(getLoginUsernameEl().value)
+    userLogin(getLoginUsernameEl().value, getLoginPasswordEl().value)
   })
 }
 
@@ -163,12 +163,12 @@ function submitUserInfo() {
     .catch(error => console.log(error.message))
 }
 
-function userLogin(username, password) {
+function userLogin(username, password_digest) {
 
   let configOptions = {
     method: 'POST',
     headers: getHeaders(),
-    body: JSON.stringify({username: username, password_digest: password})
+    body: JSON.stringify({username: username, password_digest: password_digest})
   }
   fetch(getLoginUrl(), configOptions)
   .then(response => response.json())
