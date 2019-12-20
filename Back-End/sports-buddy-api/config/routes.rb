@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :games
   resources :users
+  resources :user_games
   post '/login', to: 'users#login'
 
   # get '/patients/:id', to: 'patients#show'

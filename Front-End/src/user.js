@@ -163,12 +163,12 @@ function submitUserInfo() {
     .catch(error => console.log(error.message))
 }
 
-function userLogin(username) {
+function userLogin(username, password) {
 
   let configOptions = {
     method: 'POST',
     headers: getHeaders(),
-    body: JSON.stringify({username: username})
+    body: JSON.stringify({username: username, password_digest: password})
   }
   fetch(getLoginUrl(), configOptions)
   .then(response => response.json())
