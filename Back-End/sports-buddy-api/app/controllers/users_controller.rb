@@ -15,6 +15,11 @@ class UsersController < ApplicationController
     render json: user.to_json(serialized_data)
   end
 
+  def login
+    user = User.find_by(username: params[:username])
+    puts(user)
+  end
+
   private
 
   def strong_user_params

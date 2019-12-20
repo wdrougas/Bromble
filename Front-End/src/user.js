@@ -1,7 +1,10 @@
-// let headers = headers: {
-//     "Content-Type": 'application/json',
-//     "Accept": 'application/json'
-//   }
+const USER_URL = 'http://localhost:8000/users'
+const LOGIN_URL = 'http://localhost:8000/login'
+
+const HEADERS = {
+  "Content-Type": 'application/json',
+  "Accept": 'application/json'
+}
 
 function getMainContainerEl() {
   return document.querySelector('#main-container');
@@ -135,13 +138,10 @@ function submitUserInfo() {
     }
     let configOptions = {
       method: "POST",
-      headers: {
-        "Content-Type": 'application/json',
-        "Accept": 'application/json'
-      },
+      headers: HEADERS,
       body: JSON.stringify(userInfo)
     }
-    fetch('http://localhost:3000/users', configOptions)
+    fetch(USER_URL, configOptions)
     .then(response => {
       if (response.ok) {
         login()
@@ -153,14 +153,14 @@ function submitUserInfo() {
 }
 
 function userLogin() {
-  // fetch(`http://localhost:3000/users`)
-  // .then(response => response.json())
-  // .then(data => {return confirmLogin(data)})
-  // .catch(error => console.log(error.message))
-  getDivForms().innerHTML = ''
-  getLoginButton().remove()
-  getSignupButton().remove()
-  showHomeDiv()
+  fetch(LOGIN_URL)
+  .then(response => response.json())
+  .then(data => {return confirmLogin(data)})
+  .catch(error => console.log(error.message))
+  // getDivForms().innerHTML = ''
+  // getLoginButton().remove()
+  // getSignupButton().remove()
+  // showHomeDiv()
 }
 
 function confirmLogin(data) {
