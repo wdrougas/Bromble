@@ -31,7 +31,10 @@ class UsersController < ApplicationController
   end
 
   def serialized_data
-    {:except => [:password_digest, :created_at, :updated_at]}
+    {:except => [:password_digest, :created_at, :updated_at],
+          :include => {:games => 
+          {:except => [:created_at, :updated_at]}
+          }}
   end
 
 end
