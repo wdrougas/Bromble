@@ -17,7 +17,6 @@ class UsersController < ApplicationController
 
   def login
     user = User.find_by(username: params[:username])
-    # byebug
     if user
       if user.password_digest === params[:password_digest]
         render json: user.to_json(serialized_data)
@@ -25,7 +24,7 @@ class UsersController < ApplicationController
         render json: {message: 'Invalid username or password. Please check.'}
       end
     else
-      render json: {message: 'user not found'}
+      render json: {message: "User doesn't exist. Create and account"}
     end
   end
 
@@ -37,9 +36,13 @@ class UsersController < ApplicationController
 
   def serialized_data
     {:except => [:password_digest, :created_at, :updated_at],
-          :include => {:games => 
-          {:except => [:created_at, :updated_at]}
-          }}
+          :include =>
+            {:games =>
+              {
+                :except => [:created_at, :updated_at]
+              }
+            }
+    }
   end
 
 end
