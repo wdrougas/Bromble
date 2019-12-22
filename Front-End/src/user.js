@@ -1,10 +1,10 @@
 function getUserUrl (arguments) {
-  const USER_URL = 'http://localhost:3000/users'
+  const USER_URL = 'http://localhost:8000/users'
   return USER_URL
 }
 
 function getLoginUrl () {
-  const LOGIN_URL = 'http://localhost:3000/login'
+  const LOGIN_URL = 'http://localhost:8000/login'
   return LOGIN_URL
 }
 
@@ -81,17 +81,17 @@ function getHomeDiv() {
 }
 
 function login() {
-  // getDivForms().innerHTML = ''
+  getDivForms().innerHTML = ''
   let loginDiv = document.createElement('div')
   loginDiv.innerHTML =
   `<form id='login-form' class='ui form' action='#' method='post'>
     <div class='field'>
         <label>Username</label>
-        <input id='login-username' type='text' name='username' placeholder='Username'>
+        <input id='login-username' type='text' name='username' placeholder='Username' required>
       </div>
       <div class='field'>
         <label>Password</label>
-        <input id='login-password' type='password' name='password' placeholder='Password'>
+        <input id='login-password' type='password' name='password' placeholder='Password' required>
       </div>
       <button id='login-btn' class='ui button' type='submit'>Login</button>
   </form>`
@@ -182,20 +182,27 @@ function userLogin(username, password_digest) {
   .then(response => response.json())
   .then(currentUser => showHomeDiv(currentUser))
   .catch(error => console.log(error.message))
-  // getLoginButton().remove()
-  // getSignupButton().remove()
-  // showHomeDiv()
 }
 
 
 function showHomeDiv(currentUser) {
-  console.log(currentUser.games)
-  getButtonContainerEl().innerHTML = ''
-  getDivForms().innerHTML = ''
-  const pTagTest = document.createElement('p')
-  pTagTest.innerText = `Welcome to Sports Buddy, ${currentUser.first_name}!`
-  getMainContainerEl().append(pTagTest)
-  getHomeDiv().classList.add('ui', 'card')
-  getMainContainerEl().append(getHomeDiv())
-  getHomeDiv().innerText = `${currentUser.first_name}, ${currentUser.last_name}`
+  // console.log(currentUser)
+  if (currentUser.message === "User doesn't exist. Create and account") {
+    alert("User doesn't exist. Create and account")
+    getLoginForm().reset()
+    signUp()
+  } else if (currentUser.message === 'Invalid username or password. Please check.') {
+    alert('Invalid username or password. Please check.')
+    getLoginUsernameEl().focus()
+  } else {
+    getLoginForm().reset()
+    getButtonContainerEl().innerHTML = ''
+    getDivForms().innerHTML = ''
+    const pTagTest = document.createElement('p')
+    pTagTest.innerText = `Welcome to Sports Buddy, ${currentUser.first_name}!`
+    getMainContainerEl().append(pTagTest)
+    getHomeDiv().classList.add('ui', 'card')
+    getMainContainerEl().append(getHomeDiv())
+    getHomeDiv().innerText = `${currentUser.first_name}, ${currentUser.last_name}`
+  }
 }
