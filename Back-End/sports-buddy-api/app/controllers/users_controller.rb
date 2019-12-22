@@ -17,8 +17,13 @@ class UsersController < ApplicationController
 
   def login
     user = User.find_by(username: params[:username])
+    # byebug
     if user
-      render json: user.to_json(serialized_data)
+      if user.password_digest === params[:password_digest]
+        render json: user.to_json(serialized_data)
+      else
+        render json: {message: 'Invalid username or password. Please check.'}
+      end
     else
       render json: {message: 'user not found'}
     end

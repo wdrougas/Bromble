@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :users
   resources :user_games
   post '/login', to: 'users#login'
+  get '/login', to: 'users#login'
 
   # get '/patients/:id', to: 'patients#show'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
