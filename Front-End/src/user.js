@@ -80,6 +80,13 @@ function getHomeDiv() {
   return document.getElementById('home')
 }
 
+function getSportDiv() {
+  return document.querySelector('#sports')
+}
+function getGamesDiv() {
+  return document.querySelector('#games')
+}
+
 function login() {
   getDivForms().innerHTML = ''
   let loginDiv = document.createElement('div')
@@ -186,6 +193,7 @@ function userLogin(username, password_digest) {
 
 
 function showHomeDiv(currentUser) {
+  // console.log(currentUser)
   if (currentUser.message === "User doesn't exist. Create and account") {
     alert("User doesn't exist. Create and account")
     getLoginForm().reset()
@@ -223,9 +231,12 @@ function showHomeDiv(currentUser) {
     </div>
     `
     getMainContainerEl().append(pTagTest)
-    // getHomeDiv().classList.add('ui', 'card')
-    // getMainContainerEl().append(getHomeDiv())
     getHomeDiv().append(pTagTest)
     getHomeDiv().append(cardDiv)
   }
+}
+
+function hideHomeSportsDivs() {
+  getGamesDiv().style.display = 'none'
+  getSportDiv().style.display = 'none'
 }
