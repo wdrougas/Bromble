@@ -80,6 +80,17 @@ function getHomeDiv() {
   return document.getElementById('home')
 }
 
+function getSportDiv() {
+  return document.querySelector('#sports')
+}
+function getGamesDiv() {
+  return document.querySelector('#games')
+}
+
+function getLoginSignUpForm() {
+  return document.querySelector('.ui.placeholder.segment')
+}
+
 function login() {
   getDivForms().innerHTML = ''
   let loginDiv = document.createElement('div')
@@ -198,8 +209,32 @@ function showHomeDiv(currentUser) {
     getLoginForm().reset()
     getButtonContainerEl().innerHTML = ''
     getDivForms().innerHTML = ''
+
     const pTagTest = document.createElement('p')
+    pTagTest.style.fontSize = 'x-large'
     pTagTest.innerText = `Welcome to Sports Buddy, ${currentUser.first_name}!`
+
+    const cardDiv = document.createElement('div')
+    cardDiv.innerHTML = `
+    <div class="ui card">
+      <div class="ui slide masked reveal image">
+        <img src="${currentUser.profile_photo}" class="visible content">
+        <img src="${currentUser.profile_photo}" class="hidden content">
+      </div>
+      <div class="content">
+        <a class="header">Team Fu &amp; Hess</a>
+        <div class="meta">
+          <span class="date">Created in Sep 2014</span>
+        </div>
+      </div>
+      <div class="extra content">
+        <a>
+          <i class="users icon"></i>
+          2 Members
+        </a>
+      </div>
+    </div>
+    `
     getMainContainerEl().append(pTagTest)
     const imgTag = document.createElement('img')
     const brk = document.createElement('br')
@@ -209,5 +244,13 @@ function showHomeDiv(currentUser) {
     getHomeDiv().innerText = `${currentUser.first_name} ${currentUser.last_name}`
     getHomeDiv().append(brk)
     getHomeDiv().appendChild(imgTag)
+    // getHomeDiv().append(pTagTest)
+    getHomeDiv().append(cardDiv)
+    getLoginSignUpForm().style.display = 'none'
   }
+}
+
+function hideHomeSportsDivs() {
+  getGamesDiv().style.display = 'none'
+  getSportDiv().style.display = 'none'
 }

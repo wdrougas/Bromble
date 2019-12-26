@@ -44,17 +44,3 @@ ActiveRecord::Schema.define(version: 2019_12_20_212358) do
   end
 
 end
-
-
-# https://i.ibb.co/Qv3KBnd/Screen-Shot-2019-12-20-at-4-26-03-PM.png - Matt
-# https://i.ibb.co/Yy2ZqM5/Screen-Shot-2019-12-20-at-4-26-08-PM.png - Remi
-# https://i.ibb.co/ygb3jjt/Screen-Shot-2019-12-20-at-4-26-12-PM.png - Sebastian
-# https://i.ibb.co/qCDp5Pm/Screen-Shot-2019-12-20-at-4-26-15-PM.png - Young
-# https://i.ibb.co/JKxdb7H/Screen-Shot-2019-12-20-at-4-26-19-PM.png - Trevor
-# https://i.ibb.co/ZJvTMdJ/Screen-Shot-2019-12-20-at-4-26-22-PM.png - Jasur
-# https://i.ibb.co/zHPnQ4B/Screen-Shot-2019-12-20-at-4-26-27-PM.png - Rob
-# https://i.ibb.co/7Grb7Vm/Screen-Shot-2019-12-20-at-4-26-45-PM.png - Ryan
-# https://i.ibb.co/sgv27hZ/Screen-Shot-2019-12-20-at-4-26-50-PM.png - Sara
-# https://i.ibb.co/db61Xr8/Screen-Shot-2019-12-20-at-4-26-54-PM.png - Jose
-# https://i.ibb.co/GQfhJWL/Screen-Shot-2019-12-20-at-4-26-58-PM.png - Chine
-# https://i.ibb.co/XJJkgxj/Screen-Shot-2019-12-20-at-4-27-01-PM.png - Will
