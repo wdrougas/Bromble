@@ -1,10 +1,10 @@
 function getUserUrl (arguments) {
-  const USER_URL = 'http://localhost:8000/users'
+  const USER_URL = 'http://localhost:3000/users'
   return USER_URL
 }
 
 function getLoginUrl () {
-  const LOGIN_URL = 'http://localhost:8000/login'
+  const LOGIN_URL = 'http://localhost:3000/login'
   return LOGIN_URL
 }
 
@@ -201,8 +201,13 @@ function showHomeDiv(currentUser) {
     const pTagTest = document.createElement('p')
     pTagTest.innerText = `Welcome to Sports Buddy, ${currentUser.first_name}!`
     getMainContainerEl().append(pTagTest)
+    const imgTag = document.createElement('img')
+    const brk = document.createElement('br')
+    imgTag.src = `${currentUser.profile_photo}`
     getHomeDiv().classList.add('ui', 'card')
     getMainContainerEl().append(getHomeDiv())
-    getHomeDiv().innerText = `${currentUser.first_name}, ${currentUser.last_name}`
+    getHomeDiv().innerText = `${currentUser.first_name} ${currentUser.last_name}`
+    getHomeDiv().append(brk)
+    getHomeDiv().appendChild(imgTag)
   }
 }
