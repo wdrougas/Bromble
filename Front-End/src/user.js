@@ -186,7 +186,6 @@ function userLogin(username, password_digest) {
 
 
 function showHomeDiv(currentUser) {
-  // console.log(currentUser)
   if (currentUser.message === "User doesn't exist. Create and account") {
     alert("User doesn't exist. Create and account")
     getLoginForm().reset()
@@ -198,11 +197,35 @@ function showHomeDiv(currentUser) {
     getLoginForm().reset()
     getButtonContainerEl().innerHTML = ''
     getDivForms().innerHTML = ''
+
     const pTagTest = document.createElement('p')
     pTagTest.innerText = `Welcome to Sports Buddy, ${currentUser.first_name}!`
+
+    const cardDiv = document.createElement('div')
+    cardDiv.innerHTML = `
+    <div class="ui card">
+      <div class="ui slide masked reveal image">
+        <img src="${currentUser.profile_photo}" class="visible content">
+        <img src="${currentUser.profile_photo}" class="hidden content">
+      </div>
+      <div class="content">
+        <a class="header">Team Fu &amp; Hess</a>
+        <div class="meta">
+          <span class="date">Created in Sep 2014</span>
+        </div>
+      </div>
+      <div class="extra content">
+        <a>
+          <i class="users icon"></i>
+          2 Members
+        </a>
+      </div>
+    </div>
+    `
     getMainContainerEl().append(pTagTest)
-    getHomeDiv().classList.add('ui', 'card')
-    getMainContainerEl().append(getHomeDiv())
-    getHomeDiv().innerText = `${currentUser.first_name}, ${currentUser.last_name}`
+    // getHomeDiv().classList.add('ui', 'card')
+    // getMainContainerEl().append(getHomeDiv())
+    getHomeDiv().append(pTagTest)
+    getHomeDiv().append(cardDiv)
   }
 }
