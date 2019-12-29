@@ -28,6 +28,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def logout
+    user = null
+    render json: {message: 'User logout.'}
+  end
+
   private
 
   def strong_user_params
