@@ -1,10 +1,10 @@
 function getUserUrl (arguments) {
-  const USER_URL = 'http://localhost:8000/users'
+  const USER_URL = 'http://localhost:3000/users'
   return USER_URL
 }
 
 function getLoginUrl () {
-  const LOGIN_URL = 'http://localhost:8000/login'
+  const LOGIN_URL = 'http://localhost:3000/login'
   return LOGIN_URL
 }
 
@@ -101,7 +101,7 @@ function getGamesDiv() {
 }
 
 function getLoginSignUpForm() {
-  return document.querySelector('.ui.placeholder.segment')
+  return document.getElementById('new-login')
 }
 
 function getHomePage() {
@@ -112,23 +112,24 @@ function getScheduleNewGame() {
   return document.getElementById('new-game')
 }
 
+
 function login() {
-  getDivForms().innerHTML = ''
-  let loginDiv = document.createElement('div')
-  loginDiv.innerHTML =
-  `<form id='login-form' class='ui form' action='#' method='post'>
-    <div class='field'>
-        <label>Username</label>
-        <input id='login-username' type='text' name='username' placeholder='Username' required>
-      </div>
-      <div class='field'>
-        <label>Password</label>
-        <input id='login-password' type='password' name='password' placeholder='Password' required>
-      </div>
-      <button id='login-btn' class='ui button' type='submit'>Login</button>
-  </form>`
-  getDivForms().appendChild(loginDiv)
-  getLoginForm().addEventListener('submit', function(e) {
+  // getDivForms().innerHTML = ''
+  // let loginDiv = document.createElement('div')
+  // loginDiv.innerHTML =
+  // `<form id='login-form' class='ui form' action='#' method='post'>
+  //   <div class='field'>
+  //       <label>Username</label>
+  //       <input id='login-username' type='text' name='username' placeholder='Username' required>
+  //     </div>
+  //     <div class='field'>
+  //       <label>Password</label>
+  //       <input id='login-password' type='password' name='password' placeholder='Password' required>
+  //     </div>
+  //     <button id='login-btn' class='ui button' type='submit'>Login</button>
+  // </form>`
+  // getDivForms().appendChild(loginDiv)
+  getLoginButton().addEventListener('click', function(e) {
     e.preventDefault()
     userLogin(getLoginUsernameEl().value, getLoginPasswordEl().value)
   })
@@ -136,6 +137,7 @@ function login() {
 
 function signUp () {
   getDivForms().innerHTML = ''
+  getLoginSignUpForm().innerHTML = ''
   let signUpDiv = document.createElement('div')
   signUpDiv.innerHTML =
   `<form id='sign-up' class='ui form' action='#' method='post'>
@@ -173,12 +175,13 @@ function signUp () {
   </form>`
   getDivForms().appendChild(signUpDiv)
   getSubmitForm().addEventListener('submit', function(e) {
-    e.preventDefault()
+    // e.preventDefault()
     submitUserInfo()
   })
 }
 
 function submitUserInfo() {
+  debugger
     let userInfo = {
       first_name: getFirstNameEl().value,
       last_name: getLastNameEl().value,
@@ -195,6 +198,7 @@ function submitUserInfo() {
     fetch(getUserUrl(), configOptions)
     .then(response => {
       if (response.ok) {
+        alert("Profile created!"),
         login()
       } else {
         alert("Sign up failed. Please try again")
@@ -233,7 +237,6 @@ function showMainContainerDiv(currentUser) {
   // console.log(currentUser)
   if (currentUser.message === "User doesn't exist. Create and account") {
     alert("User doesn't exist. Create and account")
-    getLoginForm().reset()
     signUp()
   } else if (currentUser.message === 'Invalid username or password. Please check.') {
     alert('Invalid username or password. Please check.')
@@ -244,7 +247,6 @@ function showMainContainerDiv(currentUser) {
     getLogoutBtn().addEventListener('click', function(e) {
       userLogout()
     })
-    getLoginForm().reset()
     getButtonContainerEl().style.display = 'none'
     getDivForms().innerHTML = ''
     getHomeDiv().style.display = 'none'
@@ -261,7 +263,7 @@ function showMainContainerDiv(currentUser) {
         <img src="${currentUser.profile_photo}" class="hidden content">
       </div>
       <div class="content">
-        <a class="header">Team Fu &amp; Hess</a>
+        <a class="header">${currentUser.first_name} ${currentUser.last_name}</a>
         <div class="meta">
           <span class="date">Created in Sep 2014</span>
         </div>

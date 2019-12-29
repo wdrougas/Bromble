@@ -8,6 +8,7 @@ function getGamesURL() {
 }
 
 function createGame() {
+  debugger
   getHomePage().innerHTML = ''
   let createGameDiv = document.createElement('div')
   createGameDiv.innerHTML = ` <h2>Schedule New Game!</h2>
