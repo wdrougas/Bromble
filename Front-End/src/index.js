@@ -3,4 +3,5 @@ document.addEventListener("DOMContentLoaded", () => {
   getSignupButton().addEventListener('click', signUp)
   hideHomeSportsDivs()
   getScheduleNewGame().addEventListener('click', createGame)
+  doingStuffWhenThePageIsLoaded()
 })

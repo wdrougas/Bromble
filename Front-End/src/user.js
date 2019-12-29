@@ -1,11 +1,16 @@
 function getUserUrl (arguments) {
-  const USER_URL = 'http://localhost:3000/users'
+  const USER_URL = 'http://localhost:8000/users'
   return USER_URL
 }
 
 function getLoginUrl () {
-  const LOGIN_URL = 'http://localhost:3000/login'
+  const LOGIN_URL = 'http://localhost:8000/login'
   return LOGIN_URL
+}
+
+function getLogoutUrl () {
+  const LOGOUT_URL = 'http://localhost:8000/logout'
+  return LOGOUT_URL
 }
 
 function getHeaders() {
@@ -32,6 +37,10 @@ function getSignupButton() {
   return document.getElementById('signup-button')
 }
 
+function getLogoutBtn() {
+  return document.querySelector('#logout')
+}
+
 function getDivForms() {
   return document.getElementById('forms-container')
 }
@@ -46,6 +55,10 @@ function getLoginUsernameEl() {
 
 function getLoginPasswordEl() {
   return document.getElementById('login-password')
+}
+
+function getNewLoginDiv() {
+  return document.querySelector('#new-login');
 }
 
 // sign up form
@@ -191,7 +204,6 @@ function submitUserInfo() {
 }
 
 function userLogin(username, password_digest) {
-
   let configOptions = {
     method: 'POST',
     headers: getHeaders(),
@@ -199,12 +211,25 @@ function userLogin(username, password_digest) {
   }
   fetch(getLoginUrl(), configOptions)
   .then(response => response.json())
-  .then(currentUser => showHomeDiv(currentUser))
+  .then(currentUser => showMainContainerDiv(currentUser))
   .catch(error => console.log(error.message))
 }
 
+function userLogout() {
+  // if user is login, clear all the data from the current user
+  //  and show the home page.
+  getHomeDiv().style.display = ''
+  getButtonContainerEl().style.display = ''
+  getMainContainerEl().innerHTML = ''
+  getLogoutBtn().style.display = 'none'
+  // Do I need a fetch to do a fake logout ?
+  // const configOptions = {
+  //   headers: getHeaders()
+  // }
+  // fetch(getLogoutUrl())
+}
 
-function showHomeDiv(currentUser) {
+function showMainContainerDiv(currentUser) {
   // console.log(currentUser)
   if (currentUser.message === "User doesn't exist. Create and account") {
     alert("User doesn't exist. Create and account")
@@ -214,13 +239,19 @@ function showHomeDiv(currentUser) {
     alert('Invalid username or password. Please check.')
     getLoginUsernameEl().focus()
   } else {
+    getNewLoginDiv().style.display = 'none'
+    getLogoutBtn().style.display = 'flex'
+    getLogoutBtn().addEventListener('click', function(e) {
+      userLogout()
+    })
     getLoginForm().reset()
-    getButtonContainerEl().innerHTML = ''
+    getButtonContainerEl().style.display = 'none'
     getDivForms().innerHTML = ''
+    getHomeDiv().style.display = 'none'
+
 
     const pTagTest = document.createElement('p')
-    pTagTest.style.fontSize = 'x-large'
-    pTagTest.innerText = `Welcome to Bromble, ${currentUser.first_name}!`
+    pTagTest.innerText = `Welcome to Sports Buddy, ${currentUser.first_name}!`
 
     const cardDiv = document.createElement('div')
     cardDiv.innerHTML = `
@@ -230,7 +261,7 @@ function showHomeDiv(currentUser) {
         <img src="${currentUser.profile_photo}" class="hidden content">
       </div>
       <div class="content">
-        <a class="header">${currentUser.first_name} ${currentUser.last_name}</a>
+        <a class="header">Team Fu &amp; Hess</a>
         <div class="meta">
           <span class="date">Created in Sep 2014</span>
         </div>
@@ -244,22 +275,22 @@ function showHomeDiv(currentUser) {
     </div>
     `
     getMainContainerEl().append(pTagTest)
-    const imgTag = document.createElement('img')
-    const brk = document.createElement('br')
-    imgTag.src = `${currentUser.profile_photo}`
-    getHomeDiv().classList.add('ui', 'card')
-    // getMainContainerEl().append(getHomeDiv())
-    // getHomeDiv().innerText = `${currentUser.first_name} ${currentUser.last_name}`
-    // getHomeDiv().append(brk)
-    // getHomeDiv().appendChild(imgTag)
-    // getHomeDiv().append(pTagTest)
-    getHomeDiv().append(cardDiv)
-    getLoginSignUpForm().style.display = 'none'
+    getMainContainerEl().append(pTagTest)
+    getMainContainerEl().append(cardDiv)
   }
 }
 
-function hideHomeSportsDivs() {
+function hideGamesSportsDivs() {
   getGamesDiv().style.display = 'none'
   getSportDiv().style.display = 'none'
 }
 
+function hideLogoutBtn() {
+  getLogoutBtn().style.display = 'none'
+}
+
+function doingStuffWhenThePageIsLoaded() {
+  // add here functions you need when the page is loaded for the first time
+  hideGamesSportsDivs()
+  hideLogoutBtn()
+}
