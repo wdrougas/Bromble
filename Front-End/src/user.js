@@ -91,6 +91,14 @@ function getLoginSignUpForm() {
   return document.querySelector('.ui.placeholder.segment')
 }
 
+function getHomePage() {
+  return document.getElementById('page')
+}
+
+function getScheduleNewGame() {
+  return document.getElementById('new-game')
+}
+
 function login() {
   getDivForms().innerHTML = ''
   let loginDiv = document.createElement('div')
