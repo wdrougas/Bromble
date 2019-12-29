@@ -214,7 +214,6 @@ function userLogout() {
   getButtonContainerEl().style.display = ''
   getMainContainerEl().innerHTML = ''
   getLogoutBtn().style.display = 'none'
-
   // Do I need a fetch to do a fake logout ?
   // const configOptions = {
   //   headers: getHeaders()
