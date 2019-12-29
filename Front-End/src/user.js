@@ -222,7 +222,7 @@ function showHomeDiv(currentUser) {
         <img src="${currentUser.profile_photo}" class="hidden content">
       </div>
       <div class="content">
-        <a class="header">Team Fu &amp; Hess</a>
+        <a class="header">${currentUser.first_name} ${currentUser.last_name}</a>
         <div class="meta">
           <span class="date">Created in Sep 2014</span>
         </div>
@@ -240,10 +240,10 @@ function showHomeDiv(currentUser) {
     const brk = document.createElement('br')
     imgTag.src = `${currentUser.profile_photo}`
     getHomeDiv().classList.add('ui', 'card')
-    getMainContainerEl().append(getHomeDiv())
-    getHomeDiv().innerText = `${currentUser.first_name} ${currentUser.last_name}`
-    getHomeDiv().append(brk)
-    getHomeDiv().appendChild(imgTag)
+    // getMainContainerEl().append(getHomeDiv())
+    // getHomeDiv().innerText = `${currentUser.first_name} ${currentUser.last_name}`
+    // getHomeDiv().append(brk)
+    // getHomeDiv().appendChild(imgTag)
     // getHomeDiv().append(pTagTest)
     getHomeDiv().append(cardDiv)
     getLoginSignUpForm().style.display = 'none'
@@ -254,3 +254,4 @@ function hideHomeSportsDivs() {
   getGamesDiv().style.display = 'none'
   getSportDiv().style.display = 'none'
 }
+
