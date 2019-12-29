@@ -1,10 +1,10 @@
 function getUserUrl (arguments) {
-  const USER_URL = 'http://localhost:3000/users'
+  const USER_URL = 'http://localhost:8000/users'
   return USER_URL
 }
 
 function getLoginUrl () {
-  const LOGIN_URL = 'http://localhost:3000/login'
+  const LOGIN_URL = 'http://localhost:8000/login'
   return LOGIN_URL
 }
 
@@ -98,10 +98,6 @@ function getSportDiv() {
 }
 function getGamesDiv() {
   return document.querySelector('#games')
-}
-
-function getLoginSignUpForm() {
-  return document.querySelector('.ui.placeholder.segment')
 }
 
 function login() {
@@ -243,8 +239,7 @@ function showMainContainerDiv(currentUser) {
 
 
     const pTagTest = document.createElement('p')
-    pTagTest.style.fontSize = 'x-large'
-    pTagTest.innerText = `Welcome to Bromble, ${currentUser.first_name}!`
+    pTagTest.innerText = `Welcome to Sports Buddy, ${currentUser.first_name}!`
 
     const cardDiv = document.createElement('div')
     cardDiv.innerHTML = `
@@ -254,7 +249,7 @@ function showMainContainerDiv(currentUser) {
         <img src="${currentUser.profile_photo}" class="hidden content">
       </div>
       <div class="content">
-        <a class="header">${currentUser.first_name} ${currentUser.last_name}</a>
+        <a class="header">Team Fu &amp; Hess</a>
         <div class="meta">
           <span class="date">Created in Sep 2014</span>
         </div>
@@ -268,22 +263,8 @@ function showMainContainerDiv(currentUser) {
     </div>
     `
     getMainContainerEl().append(pTagTest)
-<<<<<<< HEAD
-    const imgTag = document.createElement('img')
-    const brk = document.createElement('br')
-    imgTag.src = `${currentUser.profile_photo}`
-    getHomeDiv().classList.add('ui', 'card')
-    // getMainContainerEl().append(getHomeDiv())
-    // getHomeDiv().innerText = `${currentUser.first_name} ${currentUser.last_name}`
-    // getHomeDiv().append(brk)
-    // getHomeDiv().appendChild(imgTag)
-    // getHomeDiv().append(pTagTest)
-    getHomeDiv().append(cardDiv)
-    getLoginSignUpForm().style.display = 'none'
-=======
     getMainContainerEl().append(pTagTest)
     getMainContainerEl().append(cardDiv)
->>>>>>> logout
   }
 }
 
@@ -292,8 +273,6 @@ function hideGamesSportsDivs() {
   getSportDiv().style.display = 'none'
 }
 
-<<<<<<< HEAD
-=======
 function hideLogoutBtn() {
   getLogoutBtn().style.display = 'none'
 }
@@ -303,4 +282,3 @@ function doingStuffWhenThePageIsLoaded() {
   hideGamesSportsDivs()
   hideLogoutBtn()
 }
->>>>>>> logout
