@@ -1,8 +1,13 @@
+function getSubmitNewGameButton() {
+  return document.getElementById('submit-new-game')
+}
 
-
+function getGamesURL() {
+  const GAMES_URL = 'http://localhost:3000/games'
+  return GAMES_URL
+}
 
 function createGame() {
-  debugger
   getHomePage().innerHTML = ''
   let createGameDiv = document.createElement('div')
   createGameDiv.innerHTML = ` <h2>Schedule New Game!</h2>
@@ -10,11 +15,11 @@ function createGame() {
   <form id='create-game' class='ui form' action='#' method='post'>
       <div class='field'>
           <label>Location</label>
-          <input id="location-field" type='number' name='location' placeholder='Location' max='99999' min='09999' size="5"required>
+          <input id="game-location-field" type='number' name='location' placeholder='Location' max='99999' min='09999' size="5"required>
         </div>
         <div class='field'>
           <label>Date</label>
-          <input id="time-field" type='date' name='time' placeholder='Time' required>
+          <input id="game-time-field" type='date' name='time' placeholder='Time' required>
         </div>
         <div class='field'>
           <label>Sport</label>
@@ -25,15 +30,61 @@ function createGame() {
           <option value ='Basketball'>Basketball</option>
           <option value ='Golf'>Golf</option>
           <option value ='Running'>Running</option>
-          <input id="sport-field" type='hidden' name='sport' placeholder='Sport' required>
+          <input id="game-sport-field" type='hidden' name='sport' placeholder='Sport' required>
           </select>
         </div>
         <div class='field'>
           <label>Result</label>
-          <input id="result-field" type='text' name='result' placeholder='Result' required>
+          <input id="game-result-field" type='text' name='result' placeholder='Result' required>
         </div>
-        <button id='submit' class='ui button' type='submit'>Submit</button>
+        <button id='submit-new-game' class='ui button' type='submit'>Submit</button>
     </form>`
   getHomePage().append(createGameDiv)
-
+  getSubmitNewGameButton().addEventListener('submit', function(e) {
+    e.preventDefault()
+    submitGameInfo()
+  })
   }
+
+
+  function submitGameInfo() {
+    let gameInfo = {
+      location: document.getElementById('game-location-field').value,
+      time: document.getElementById('game-time-field').value,
+      sport: document.getElementById('game-sport-field').value, 
+      result: document.getElementById('game-result-field').value
+    }
+    let configOptions = {
+      method: 'POST',
+      headers: getHeaders(),
+      body: JSON.stringify(gameInfo)
+    }
+    fetch(getGamesURL(), configOptions)
+    .then(response => response.json)
+  }
+
+
+//   function submitUserInfo() {
+//     let userInfo = {
+//       first_name: getFirstNameEl().value,
+//       last_name: getLastNameEl().value,
+//       username: getUsernameEl().value,
+//       password_digest: getPasswordEl().value,
+//       email: getEmailEl().value,
+//       location: getLocationEl().value
+//     }
+//     let configOptions = {
+//       method: "POST",
+//       headers: getHeaders(),
+//       body: JSON.stringify(userInfo)
+//     }
+//     fetch(getUserUrl(), configOptions)
+//     .then(response => {
+//       if (response.ok) {
+//         login()
+//       } else {
+//         alert("Sign up failed. Please try again")
+//       }
+//     })
+//     .catch(error => console.log(error.message))
+// }
