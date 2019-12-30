@@ -253,7 +253,7 @@ function showMainContainerDiv(currentUser) {
 
 
     const pTagTest = document.createElement('p')
-    pTagTest.innerText = `Welcome to Sports Buddy, ${currentUser.first_name}!`
+    pTagTest.innerText = `Welcome to Bromble, ${currentUser.first_name}!`
 
     const cardDiv = document.createElement('div')
     cardDiv.innerHTML = `
