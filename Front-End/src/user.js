@@ -1,4 +1,4 @@
-function getUserUrl (arguments) {
+function getUsersUrl (arguments) {
   const USER_URL = 'http://localhost:3000/users'
   return USER_URL
 }
@@ -9,7 +9,7 @@ function getLoginUrl () {
 }
 
 function getLogoutUrl () {
-  const LOGOUT_URL = 'http://localhost:8000/logout'
+  const LOGOUT_URL = 'http://localhost:3000/logout'
   return LOGOUT_URL
 }
 
@@ -198,7 +198,7 @@ function submitUserInfo() {
       headers: getHeaders(),
       body: JSON.stringify(userInfo)
     }
-    fetch(getUserUrl(), configOptions)
+    fetch(getUsersUrl(), configOptions)
     .then(response => {
       if (response.ok) {
         alert("Profile created!"),
