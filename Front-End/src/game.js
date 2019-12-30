@@ -55,7 +55,7 @@ function createGame() {
       <input type="hidden" name="user">
       <i class="dropdown icon"></i>
       <div class="default text">Select Friend</div>
-      <div class="menu">
+      <div class="menu"> <!-- for each user we need to create this div with everything inside -->
         <div class="item" data-value="jenny">
           <img class="ui mini avatar image" src="">
           Jenny Hess
