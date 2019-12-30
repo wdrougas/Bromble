@@ -116,27 +116,28 @@ function getColumn2Div() {
   return document.querySelector('#column-2');
 }
 
-function login() {
-  // getDivForms().innerHTML = ''
-  // let loginDiv = document.createElement('div')
-  // loginDiv.innerHTML =
-  // `<form id='login-form' class='ui form' action='#' method='post'>
-  //   <div class='field'>
-  //       <label>Username</label>
-  //       <input id='login-username' type='text' name='username' placeholder='Username' required>
-  //     </div>
-  //     <div class='field'>
-  //       <label>Password</label>
-  //       <input id='login-password' type='password' name='password' placeholder='Password' required>
-  //     </div>
-  //     <button id='login-btn' class='ui button' type='submit'>Login</button>
-  // </form>`
-  // getDivForms().appendChild(loginDiv)
-  getLoginButton().addEventListener('click', function(e) {
-    e.preventDefault()
-    userLogin(getLoginUsernameEl().value, getLoginPasswordEl().value)
-  })
-}
+// function login() {
+//   // getDivForms().innerHTML = ''
+//   // let loginDiv = document.createElement('div')
+//   // loginDiv.innerHTML =
+//   // `<form id='login-form' class='ui form' action='#' method='post'>
+//   //   <div class='field'>
+//   //       <label>Username</label>
+//   //       <input id='login-username' type='text' name='username' placeholder='Username' required>
+//   //     </div>
+//   //     <div class='field'>
+//   //       <label>Password</label>
+//   //       <input id='login-password' type='password' name='password' placeholder='Password' required>
+//   //     </div>
+//   //     <button id='login-btn' class='ui button' type='submit'>Login</button>
+//   // </form>`
+//   // getDivForms().appendChild(loginDiv)
+//   getLoginButton().addEventListener('click', function(e) {
+//     e.preventDefault()
+//     userLogin(getLoginUsernameEl().value, getLoginPasswordEl().value)
+//   })
+// }
+
 
 function signUp () {
   getDivForms().innerHTML = ''
@@ -178,7 +179,7 @@ function signUp () {
   </form>`
   getDivForms().appendChild(signUpDiv)
   getSubmitForm().addEventListener('submit', function(e) {
-    // e.preventDefault()
+    e.preventDefault()
     submitUserInfo()
   })
 }
@@ -201,8 +202,8 @@ function submitUserInfo() {
     fetch(getUserUrl(), configOptions)
     .then(response => {
       if (response.ok) {
-        alert("Profile created!"),
-        login()
+        alert("Profile created!")
+        window.location.reload(true)
       } else {
         alert("Sign up failed. Please try again")
       }
@@ -305,6 +306,9 @@ function userDoingStuffWhenThePageIsLoaded() {
   hideGamesSportsDivs()
   hideLogoutBtn()
   hideScheduleNewGame()
-  getLoginButton().addEventListener('click', login)
+  getLoginButton().addEventListener('click', function(e) {
+    e.preventDefault()
+    userLogin(getLoginUsernameEl().value, getLoginPasswordEl().value)
+  })
   getSignupButton().addEventListener('click', signUp)
 }
