@@ -3,6 +3,11 @@ function getGamesURL() {
   return GAMES_URL
 }
 
+function getUserGamesURL() {
+  const USER_GAMES_URL = 'http://localhost:3000/user_games'
+  return USER_GAMES_URL
+}
+
 function getSubmitNewGameButton() {
   return document.getElementById('submit-new-game')
 }
@@ -129,9 +134,21 @@ function submitGameInfo() {
     body: JSON.stringify(gameInfo)
   }
   fetch(getGamesURL(), configOptions)
-  .then(response => response.json)
-  .then(newGame => console.log(newGame))
+  .then(response => response.json())
+  .then(newGame => {createUserGame(newGame, getUserId())})
   .catch(err=>console.log(err.message))
+}
+
+function createUserGame(newGame, userId) {
+  let newUserGame = {game_id: newGame.id, user_id: userId}
+  let configOptions = {
+    method: 'POST',
+    headers: getHeaders(),
+    body: JSON.stringify(newUserGame)
+  }
+  fetch(getUserGamesURL(),configOptions)
+    .then(res => res.json())
+    .then(newUserGameRes => console.log(newUserGameRes))
 }
 
 
