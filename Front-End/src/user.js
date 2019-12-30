@@ -112,6 +112,10 @@ function getScheduleNewGame() {
   return document.getElementById('new-game')
 }
 
+function getColumn2Div() {
+  return document.querySelector('#column-2');
+}
+
 function login() {
   getDivForms().innerHTML = ''
   let loginDiv = document.createElement('div')
@@ -218,6 +222,7 @@ function userLogin(username, password_digest) {
 function userLogout() {
   // if user is login, clear all the data from the current user
   //  and show the home page.
+  getScheduleNewGame().style.display = ''
   getHomeDiv().style.display = ''
   getButtonContainerEl().style.display = ''
   getMainContainerEl().innerHTML = ''
@@ -248,6 +253,7 @@ function showMainContainerDiv(currentUser) {
     getButtonContainerEl().style.display = 'none'
     getDivForms().innerHTML = ''
     getHomeDiv().style.display = 'none'
+    getScheduleNewGame().style.display = ''
 
 
     const pTagTest = document.createElement('p')
@@ -289,8 +295,15 @@ function hideLogoutBtn() {
   getLogoutBtn().style.display = 'none'
 }
 
-function doingStuffWhenThePageIsLoaded() {
+function hideScheduleNewGame(){
+  getScheduleNewGame().style.display = 'none'
+}
+
+function userDoingStuffWhenThePageIsLoaded() {
   // add here functions you need when the page is loaded for the first time
   hideGamesSportsDivs()
   hideLogoutBtn()
+  hideScheduleNewGame()
+  getLoginButton().addEventListener('click', login)
+  getSignupButton().addEventListener('click', signUp)
 }
