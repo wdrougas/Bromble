@@ -1,4 +1,4 @@
-function getUserUrl (arguments) {
+function getUsersUrl (arguments) {
   const USER_URL = 'http://localhost:8000/users'
   return USER_URL
 }
@@ -196,7 +196,7 @@ function submitUserInfo() {
       headers: getHeaders(),
       body: JSON.stringify(userInfo)
     }
-    fetch(getUserUrl(), configOptions)
+    fetch(getUsersUrl(), configOptions)
     .then(response => {
       if (response.ok) {
         login()

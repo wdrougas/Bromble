@@ -92,33 +92,39 @@ function submitGameInfo() {
   .catch(err=>console.log(err.message))
 }
 
-
-//   function submitUserInfo() {
-//     let userInfo = {
-//       first_name: getFirstNameEl().value,
-//       last_name: getLastNameEl().value,
-//       username: getUsernameEl().value,
-//       password_digest: getPasswordEl().value,
-//       email: getEmailEl().value,
-//       location: getLocationEl().value
-//     }
-//     let configOptions = {
-//       method: "POST",
-//       headers: getHeaders(),
-//       body: JSON.stringify(userInfo)
-//     }
-//     fetch(getUserUrl(), configOptions)
-//     .then(response => {
-//       if (response.ok) {
-//         login()
-//       } else {
-//         alert("Sign up failed. Please try again")
-//       }
-//     })
-//     .catch(error => console.log(error.message))
-// }
-
 function gameDoingStuffWhenThePageIsLoaded() {
   // add here functions you need when the page is loaded for the first time
   getScheduleNewGame().addEventListener('click', createGame)
 }
+
+function getUsers() {
+  fetch(getUsersUrl())
+  .then(res => res.json())
+  .then(users => console.log(users))
+  .catch(err => console.log(err.message))
+}
+
+//   function submitUserInfo() {
+  //     let userInfo = {
+    //       first_name: getFirstNameEl().value,
+    //       last_name: getLastNameEl().value,
+    //       username: getUsernameEl().value,
+    //       password_digest: getPasswordEl().value,
+    //       email: getEmailEl().value,
+    //       location: getLocationEl().value
+    //     }
+    //     let configOptions = {
+      //       method: "POST",
+      //       headers: getHeaders(),
+      //       body: JSON.stringify(userInfo)
+      //     }
+      //     fetch(getUserUrl(), configOptions)
+      //     .then(response => {
+        //       if (response.ok) {
+          //         login()
+          //       } else {
+            //         alert("Sign up failed. Please try again")
+            //       }
+            //     })
+            //     .catch(error => console.log(error.message))
+            // }
