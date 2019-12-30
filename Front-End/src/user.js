@@ -1,4 +1,4 @@
-function getUsersUrl (arguments) {
+function getUserUrl() {
   const USER_URL = 'http://localhost:3000/users'
   return USER_URL
 }
@@ -311,4 +311,23 @@ function userDoingStuffWhenThePageIsLoaded() {
     userLogin(getLoginUsernameEl().value, getLoginPasswordEl().value)
   })
   getSignupButton().addEventListener('click', signUp)
+}
+
+function getUsers() {
+  fetch(`http://localhost:3000/users`)
+  .then(response => response.json())
+  .then(users => {users.forEach(user => listUserElements(user))})
+}
+
+
+function listUserElements(user) {
+  let userDropdown = document.getElementById('users-list')
+  let userEl = document.createElement('a')
+  let userImg = document.createElement('img')
+  userEl.classList.add('item')
+  userImg.classList.add('ui', 'mini', 'avatar', 'image')
+  userDropdown.append(userEl)
+  userEl.prepend(userImg)
+  userEl.innerText = `${user.first_name} ${user.last_name}`
+  userImg.src = `${user.profile_photo}`
 }
