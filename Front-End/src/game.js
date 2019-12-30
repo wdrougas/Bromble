@@ -59,7 +59,6 @@ function createGame() {
       <input id="game-result-field" type='text' name='result' placeholder='Result' required>
     </div>
     <!-- begin add dropdown with search for user -->
-    <!-- <div class="ui fluid selection dropdown"> -->
     <div class='field' id='user-dropdown'>
       <label>Users</label>
       <select class ='ui fluid dropdown' id='user-select'>
@@ -67,7 +66,7 @@ function createGame() {
         <input id="game-user-field" type='hidden' name='user' placeholder='User' required>
       </select>
     </div>
-    <!-- end add dropdown with search for user -->
+
     <button id='submit-new-game' class='ui button' type='submit'>Submit</button>
   </form>`
   getUsers()
