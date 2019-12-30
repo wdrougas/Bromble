@@ -1,5 +1,5 @@
 function getUsersUrl (arguments) {
-  const USER_URL = 'http://localhost:8000/users'
+  const USER_URL = 'http://localhost:3000/users'
   return USER_URL
 }
 
