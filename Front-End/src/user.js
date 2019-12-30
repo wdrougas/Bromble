@@ -313,7 +313,7 @@ function userDoingStuffWhenThePageIsLoaded() {
   getSignupButton().addEventListener('click', signUp)
 }
 
-function getUsers() {
+function getUser() {
   fetch(`http://localhost:3000/users`)
   .then(response => response.json())
   .then(users => {users.forEach(user => listUserElements(user))})
