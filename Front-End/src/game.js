@@ -39,10 +39,16 @@ function getGameFormDivEl() {
   return document.querySelector('#game-form-div')
 }
 
+function getColumn3Div() {
+  return document.getElementById('column-3')
+}
+
+function getGameForm() {
+  return document.getElementById('form-create-game')
+}
 
 
 function createGame() {
-  getColumn2Div().innerHTML = ''
   let createGameDiv = document.createElement('div')
   createGameDiv.id = 'game-form-div'
   createGameDiv.innerHTML = `<h2>Schedule New Game!</h2>
@@ -83,13 +89,13 @@ function createGame() {
     <button id='submit-new-game' class='ui button' type='submit'>Submit</button>
   </form>`
   getUsers()
-  getColumn2Div().append(createGameDiv)
+  getColumn3Div().append(createGameDiv)
   let formCreateGame = document.querySelector('#form-create-game')
   formCreateGame.addEventListener('submit', function(e) {
     e.preventDefault()
     alert("Game Scheduled!")
     submitGameInfo()
-    showMainContainerDiv()
+    getGameForm().reset()
   })
 }
 
@@ -148,6 +154,7 @@ function addUsersToDropdownInTheForm(users) {
 }
 
 function submitGameInfo() {
+  let ulGameListEl = document.querySelector('#gamelist-id')
   let gameInfo = {
     location: getGameLocationEl().value,
     time: getGameTimeEl().value,
@@ -162,7 +169,7 @@ function submitGameInfo() {
   }
   fetch(getGamesURL(), configOptions)
   .then(response => response.json())
-  .then(newGame => {createUserGame(newGame, getUserId())})
+  .then(newGame => {createUserGame(newGame, getUserId()); renderSingleGame(newGame, ulGameListEl)})
   .catch(err=>console.log(err.message))
 }
 
