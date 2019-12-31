@@ -30,9 +30,14 @@ function getSportSelectEl() {
   return document.querySelector('#sport-select')
 }
 
+function getGameFormDivEl() {
+  return document.querySelector('#game-form-div')
+}
+
 function createGame() {
   let createGameDiv = document.createElement('div')
-  createGameDiv.innerHTML = ` <h2>Schedule New Game!</h2>
+  createGameDiv.id = 'game-form-div'
+  createGameDiv.innerHTML = `<h2>Schedule New Game!</h2>
   <form id='form-create-game' class='ui form' action='#' method='post'>
     <div class='field'>
       <label>Location</label>
@@ -59,7 +64,6 @@ function createGame() {
       <input id="game-result-field" type='text' name='result' placeholder='Result' required>
     </div>
     <!-- begin add dropdown with search for user -->
-    <!-- <div class="ui fluid selection dropdown"> -->
     <div class='field' id='user-dropdown'>
       <label>Users</label>
       <select class ='ui fluid dropdown' id='user-select'>
@@ -67,7 +71,7 @@ function createGame() {
         <input id="game-user-field" type='hidden' name='user' placeholder='User' required>
       </select>
     </div>
-    <!-- end add dropdown with search for user -->
+
     <button id='submit-new-game' class='ui button' type='submit'>Submit</button>
   </form>`
   getUsers()
