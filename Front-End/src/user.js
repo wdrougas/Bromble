@@ -291,6 +291,22 @@ function showMainContainerDiv(currentUser) {
     getMainContainerEl().append(pTagTest)
     getMainContainerEl().append(pTagTest)
     getMainContainerEl().append(cardDiv)
+
+    let games = currentUser.games
+    let user_games = currentUser.user_games
+    let gameColumn = document.getElementById('column-2')
+    let gameList = document.createElement('ul')
+    let gameHeader = document.createElement('h3')
+    gameHeader.innerText = 'Your Games'
+    games.forEach(function(game) {
+      var li = document.createElement('li');
+      let time = game.time.split('-')
+      console.log(time)
+      li.innerHTML = `Date: ${time[1]}/${time[2].charAt(0)}${time[2].charAt(1)}/${time[0]} <br> Location: ${game.location} <br> Sport: ${game.sport} <br>`
+      gameList.appendChild(li)
+    })
+    gameColumn.appendChild(gameHeader)
+    gameColumn.appendChild(gameList)
   }
 }
 
