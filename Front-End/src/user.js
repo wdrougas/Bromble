@@ -121,6 +121,9 @@ function getCurrentUserId() {
 }
 
 
+
+
+
 // function login() {
 //   // getDivForms().innerHTML = ''
 //   // let loginDiv = document.createElement('div')
@@ -227,6 +230,7 @@ function userLogin(username, password_digest) {
   .catch(error => console.log(error.message))
 }
 
+
 function userLogout() {
   // if user is login, clear all the data from the current user
   //  and show the home page.
@@ -248,7 +252,6 @@ function userLogout() {
 }
 
 function showMainContainerDiv(currentUser) {
-  // console.log(currentUser)
   if (currentUser.message === "User doesn't exist. Create and account") {
     alert("User doesn't exist. Create and account")
     signUp()
@@ -307,7 +310,6 @@ function showMainContainerDiv(currentUser) {
     games.forEach(function(game) {
       var li = document.createElement('li');
       let time = game.time.split('-')
-      console.log(time)
       li.innerHTML = `Date: ${time[1]}/${time[2].charAt(0)}${time[2].charAt(1)}/${time[0]} <br> Location: ${game.location} <br> Sport: ${game.sport} <br>`
       gameList.appendChild(li)
     })

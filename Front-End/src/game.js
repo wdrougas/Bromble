@@ -39,7 +39,10 @@ function getGameFormDivEl() {
   return document.querySelector('#game-form-div')
 }
 
+
+
 function createGame() {
+  getColumn2Div().innerHTML = ''
   let createGameDiv = document.createElement('div')
   createGameDiv.id = 'game-form-div'
   createGameDiv.innerHTML = `<h2>Schedule New Game!</h2>
@@ -84,7 +87,9 @@ function createGame() {
   let formCreateGame = document.querySelector('#form-create-game')
   formCreateGame.addEventListener('submit', function(e) {
     e.preventDefault()
+    alert("Game Scheduled!")
     submitGameInfo()
+    showMainContainerDiv()
   })
 }
 
@@ -174,7 +179,6 @@ function createUserGame(newGame, userId) {
 }
 
 function createSecondUserGame(newUserGameRes) {
-  console.log(newUserGameRes.game_id)
   let newUserGame = {game_id:newUserGameRes.game_id, user_id: getCurrentUserId()}
   let configOptions = {
     method: 'POST',
