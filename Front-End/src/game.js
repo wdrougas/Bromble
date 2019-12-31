@@ -35,10 +35,14 @@ function getSportSelectEl() {
   return document.querySelector('#sport-select')
 }
 
+function getGameFormDivEl() {
+  return document.querySelector('#game-form-div')
+}
 
 function createGame() {
   let createGameDiv = document.createElement('div')
-  createGameDiv.innerHTML = ` <h2>Schedule New Game!</h2>
+  createGameDiv.id = 'game-form-div'
+  createGameDiv.innerHTML = `<h2>Schedule New Game!</h2>
   <form id='form-create-game' class='ui form' action='#' method='post'>
     <div class='field'>
       <label>Location</label>
@@ -103,10 +107,27 @@ function getUsers() {
   .catch(err => console.log(err.message))
 }
 
+function getCurrentUsername() {
+  return document.querySelector('#p-tag-welcome-user').dataset.username
+}
 
+function excludeCurrentUser(user) {
+  return user.username !== getCurrentUsername()
+}
 function addUsersToDropdownInTheForm(users) {
   const userSelectEl = getUserSelectEl()
-  users.forEach(function(user) {
+  // begin filter user #####
+  // words.filter(word => word.length > 6)
+  // function isBigEnough(value) {
+  // return value >= 10
+  // }
+  // let filtered = [12, 5, 8, 130, 44].filter(isBigEnough)
+  // filtered is [12, 130, 44]
+  // let testFilterUser = users.filter(excludeCurrentUser)
+  // end filter user
+
+  let usersFiltered = users.filter(user => user.username!== getCurrentUsername())
+  usersFiltered.forEach(function(user) {
     let userOption = document.createElement('option')
     userOption.id = `${user.id}-${user.username}`
     userOption.value = `${user.id}`
