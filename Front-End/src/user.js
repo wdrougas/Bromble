@@ -226,11 +226,16 @@ function userLogin(username, password_digest) {
 function userLogout() {
   // if user is login, clear all the data from the current user
   //  and show the home page.
-  getScheduleNewGame().style.display = ''
+  hideScheduleNewGame()
   getHomeDiv().style.display = ''
   getButtonContainerEl().style.display = ''
   getMainContainerEl().innerHTML = ''
-  getLogoutBtn().style.display = 'none'
+  // $('#leftmenu').is(':empty')
+  if (getGameFormDivEl() !== null) {
+    getGameFormDivEl().innerHTML = ''
+    getLogoutBtn().style.display = 'none'
+  }
+  window.location.reload(true)
   // Do I need a fetch to do a fake logout ?
   // const configOptions = {
   //   headers: getHeaders()
