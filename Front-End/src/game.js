@@ -96,7 +96,7 @@ function getSportValue() {
 }
 
 function getUsers() {
-  fetch(getUsersUrl())
+  fetch(getUserUrl())
   .then(res => res.json())
   .then(users => addUsersToDropdownInTheForm(users))
   .catch(err => console.log(err.message))
