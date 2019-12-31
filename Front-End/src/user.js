@@ -203,7 +203,7 @@ function submitUserInfo() {
       headers: getHeaders(),
       body: JSON.stringify(userInfo)
     }
-    fetch(getUsersUrl(), configOptions)
+    fetch(getUserUrl(), configOptions)
     .then(response => {
       if (response.ok) {
         alert("Profile created!")
