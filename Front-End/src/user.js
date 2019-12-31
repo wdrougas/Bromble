@@ -185,7 +185,6 @@ function signUp () {
 }
 
 function submitUserInfo() {
-  debugger
     let userInfo = {
       first_name: getFirstNameEl().value,
       last_name: getLastNameEl().value,
@@ -264,6 +263,8 @@ function showMainContainerDiv(currentUser) {
 
 
     const pTagTest = document.createElement('p')
+    pTagTest.id = 'p-tag-welcome-user'
+    pTagTest.dataset.username = `${currentUser.username}`
     pTagTest.innerText = `Welcome to Bromble, ${currentUser.first_name}!`
 
     const cardDiv = document.createElement('div')

@@ -102,10 +102,27 @@ function getUsers() {
   .catch(err => console.log(err.message))
 }
 
+function getCurrentUsername() {
+  return document.querySelector('#p-tag-welcome-user').dataset.username
+}
 
+function excludeCurrentUser(user) {
+  return user.username !== getCurrentUsername()
+}
 function addUsersToDropdownInTheForm(users) {
   const userSelectEl = getUserSelectEl()
-  users.forEach(function(user) {
+  // begin filter user #####
+  // words.filter(word => word.length > 6)
+  // function isBigEnough(value) {
+  // return value >= 10
+  // }
+  // let filtered = [12, 5, 8, 130, 44].filter(isBigEnough)
+  // filtered is [12, 130, 44]
+  // let testFilterUser = users.filter(excludeCurrentUser)
+  // end filter user
+
+  let usersFiltered = users.filter(user => user.username!== getCurrentUsername())
+  usersFiltered.forEach(function(user) {
     let userOption = document.createElement('option')
     userOption.id = `${user.id}-${user.username}`
     userOption.value = `${user.id}`
@@ -144,35 +161,3 @@ function gameDoingStuffWhenThePageIsLoaded() {
   getScheduleNewGame().addEventListener('click', createGame)
 
 }
-
-function getUsers() {
-  fetch(getUsersUrl())
-  .then(res => res.json())
-  .then(users => console.log(users))
-  .catch(err => console.log(err.message))
-}
-
-//   function submitUserInfo() {
-  //     let userInfo = {
-    //       first_name: getFirstNameEl().value,
-    //       last_name: getLastNameEl().value,
-    //       username: getUsernameEl().value,
-    //       password_digest: getPasswordEl().value,
-    //       email: getEmailEl().value,
-    //       location: getLocationEl().value
-    //     }
-    //     let configOptions = {
-      //       method: "POST",
-      //       headers: getHeaders(),
-      //       body: JSON.stringify(userInfo)
-      //     }
-      //     fetch(getUserUrl(), configOptions)
-      //     .then(response => {
-        //       if (response.ok) {
-          //         login()
-          //       } else {
-            //         alert("Sign up failed. Please try again")
-            //       }
-            //     })
-            //     .catch(error => console.log(error.message))
-            // }
