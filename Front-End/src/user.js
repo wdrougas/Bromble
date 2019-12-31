@@ -116,6 +116,11 @@ function getColumn2Div() {
   return document.querySelector('#column-2');
 }
 
+function getCurrentUserId() {
+  return document.getElementById('user-card').dataset.id
+}
+
+
 // function login() {
 //   // getDivForms().innerHTML = ''
 //   // let loginDiv = document.createElement('div')
@@ -262,8 +267,9 @@ function showMainContainerDiv(currentUser) {
     pTagTest.innerText = `Welcome to Bromble, ${currentUser.first_name}!`
 
     const cardDiv = document.createElement('div')
+
     cardDiv.innerHTML = `
-    <div class="ui card">
+    <div id='user-card' class="ui card" data-id=${currentUser.id}>
       <div class="ui slide masked reveal image">
         <img src="${currentUser.profile_photo}" class="visible content">
         <img src="${currentUser.profile_photo}" class="hidden content">

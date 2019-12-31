@@ -35,6 +35,7 @@ function getSportSelectEl() {
   return document.querySelector('#sport-select')
 }
 
+
 function createGame() {
   let createGameDiv = document.createElement('div')
   createGameDiv.innerHTML = ` <h2>Schedule New Game!</h2>
@@ -148,7 +149,20 @@ function createUserGame(newGame, userId) {
   }
   fetch(getUserGamesURL(),configOptions)
     .then(res => res.json())
-    .then(newUserGameRes => console.log(newUserGameRes))
+    .then(newUserGameRes => createSecondUserGame(newUserGameRes))
+}
+
+function createSecondUserGame(newUserGameRes) {
+  console.log(newUserGameRes.game_id)
+  let newUserGame = {game_id:newUserGameRes.game_id, user_id: getCurrentUserId()}
+  let configOptions = {
+    method: 'POST',
+    headers: getHeaders(),
+    body: JSON.stringify(newUserGame)
+  }
+  fetch(getUserGamesURL(), configOptions)
+  .then(res => res.json())
+  .then(newUserGameRes => console.log(newUserGameRes))
 }
 
 
