@@ -124,6 +124,9 @@ function getCurrentUsername() {
   return document.querySelector('#p-tag-welcome-user').dataset.username
 }
 
+
+
+
 // function login() {
 //   // getDivForms().innerHTML = ''
 //   // let loginDiv = document.createElement('div')
@@ -231,6 +234,7 @@ function userLogin(username, password_digest) {
   .catch(error => console.log(error.message))
 }
 
+
 function userLogout() {
   // if user is login, clear all the data from the current user
   //  and show the home page.
@@ -252,7 +256,6 @@ function userLogout() {
 }
 
 function showMainContainerDiv(currentUser) {
-  // console.log(currentUser)
   if (currentUser.message === "User doesn't exist. Create and account") {
     alert("User doesn't exist. Create and account")
     signUp()
@@ -303,21 +306,29 @@ function showMainContainerDiv(currentUser) {
     getMainContainerEl().append(cardDiv)
 
     let games = currentUser.games
-    let user_games = currentUser.user_games
     let gameColumn = document.getElementById('column-2')
     let gameList = document.createElement('ul')
+    gameList.id = 'gamelist-id'
     let gameHeader = document.createElement('h3')
     gameHeader.innerText = 'Your Games'
-    games.forEach(function(game) {
-      var li = document.createElement('li');
-      let time = game.time.split('-')
-      console.log(time)
-      li.innerHTML = `Date: ${time[1]}/${time[2].charAt(0)}${time[2].charAt(1)}/${time[0]} <br> Location: ${game.location} <br> Sport: ${game.sport} <br>`
-      gameList.appendChild(li)
-    })
+    // games.forEach(function(game) {
+    //   var li = document.createElement('li');
+    //   let time = game.time.split('-')
+    //   li.innerHTML = `Date: ${time[1]}/${time[2].charAt(0)}${time[2].charAt(1)}/${time[0]} <br> Location: ${game.location} <br> Sport: ${game.sport} <br>`
+    //   gameList.appendChild(li)
+    // })
+    games.forEach(game => renderSingleGame(game, gameList))
     gameColumn.appendChild(gameHeader)
     gameColumn.appendChild(gameList)
   }
+}
+
+function renderSingleGame(game, gameList) {
+  console.log(game)
+  var li = document.createElement('li');
+      let time = game.time.split('-')
+      li.innerHTML = `Date: ${time[1]}/${time[2].charAt(0)}${time[2].charAt(1)}/${time[0]} <br> Location: ${game.location} <br> Sport: ${game.sport} <br>`
+      gameList.appendChild(li)
 }
 
 function hideGamesSportsDivs() {
