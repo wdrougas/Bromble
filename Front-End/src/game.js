@@ -64,7 +64,7 @@ function createGame() {
     <div class='field'>
       <label>Sport</label>
       <select class ='ui fluid dropdown' id='sport-select'>
-      <option value =''>Sport</option>
+      <option value ='sports'>Sport</option>
       <option value ='Tennis'>Tennis</option>
       <option value ='Table Tennis'>Table Tennis</option>
       <option value ='Basketball'>Basketball</option>
@@ -81,7 +81,7 @@ function createGame() {
     <div class='field' id='user-dropdown'>
       <label>Users</label>
       <select class ='ui fluid dropdown' id='user-select'>
-        <option value =''>Users</option>
+        <option value ='users'>Users</option>
         <input id="game-user-field" type='hidden' name='user' placeholder='User' required>
       </select>
     </div>
@@ -93,9 +93,7 @@ function createGame() {
   let formCreateGame = document.querySelector('#form-create-game')
   formCreateGame.addEventListener('submit', function(e) {
     e.preventDefault()
-    alert("Game Scheduled!")
     submitGameInfo()
-    getGameForm().reset()
   })
 }
 
@@ -163,10 +161,18 @@ function submitGameInfo() {
     headers: getHeaders(),
     body: JSON.stringify(gameInfo)
   }
-  fetch(getGamesURL(), configOptions)
-  .then(response => response.json())
-  .then(newGame => {createUserGame(newGame, getUserId()); renderSingleGame(newGame, ulGameListEl)})
-  .catch(err=>console.log(err.message))
+  if (getSportValue() !== 'sports' && getUserId() !== 'users') {
+    fetch(getGamesURL(), configOptions)
+    .then(response => response.json())
+    .then(newGame => {
+      createUserGame(newGame, getUserId())
+      renderSingleGame(newGame, ulGameListEl)
+    })
+    .catch(err=>console.log(err.message))
+  } else {
+    alert('Must pick a sport and a user')
+  }
+
 }
 
 function createUserGame(newGame, userId) {
@@ -177,8 +183,9 @@ function createUserGame(newGame, userId) {
     body: JSON.stringify(newUserGame)
   }
   fetch(getUserGamesURL(),configOptions)
-    .then(res => res.json())
-    .then(newUserGameRes => createSecondUserGame(newUserGameRes))
+  .then(res => res.json())
+  .then(newUserGameRes => createSecondUserGame(newUserGameRes))
+  .catch(err => console.log(err.message))  
 }
 
 function createSecondUserGame(newUserGameRes) {
@@ -190,7 +197,12 @@ function createSecondUserGame(newUserGameRes) {
   }
   fetch(getUserGamesURL(), configOptions)
   .then(res => res.json())
-  .then(newUserGameRes => console.log(newUserGameRes))
+  .then(newUserGameRes => {
+    console.log(newUserGameRes)
+    getGameForm().reset()
+    alert("Game Scheduled!")
+  })
+  .catch(err => console.log(err.message))
 }
 
 
