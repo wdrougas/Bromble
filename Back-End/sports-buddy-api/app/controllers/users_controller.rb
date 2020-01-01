@@ -36,11 +36,11 @@ class UsersController < ApplicationController
   private
 
   def strong_user_params
-    params.require(:user).permit(:first_name, :last_name, :username, :email, :location, :password_digest)
+    params.require(:user).permit(:first_name, :last_name, :username, :email, :location, :password_digest, :profile_photo)
   end
 
   def serialized_data
-    {:except => [:password_digest, :created_at, :updated_at],
+    {:except => [:password_digest, :updated_at],
           :include =>
             {:games =>
               {

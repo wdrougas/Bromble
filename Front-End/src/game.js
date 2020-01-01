@@ -66,7 +66,7 @@ function createGame() {
     </div>
     <div class='field'>
       <label>Result</label>
-      <input id="game-result-field" type='text' name='result' placeholder='Result' required>
+      <input id="game-result-field" type='text' name='result' value='none' disabled required>
     </div>
     <!-- begin add dropdown with search for user -->
     <div class='field' id='user-dropdown'>
@@ -105,10 +105,6 @@ function getUsers() {
   .then(res => res.json())
   .then(users => addUsersToDropdownInTheForm(users))
   .catch(err => console.log(err.message))
-}
-
-function getCurrentUsername() {
-  return document.querySelector('#p-tag-welcome-user').dataset.username
 }
 
 function excludeCurrentUser(user) {

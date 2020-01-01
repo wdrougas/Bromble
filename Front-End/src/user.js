@@ -120,6 +120,9 @@ function getCurrentUserId() {
   return document.getElementById('user-card').dataset.id
 }
 
+function getCurrentUsername() {
+  return document.querySelector('#p-tag-welcome-user').dataset.username
+}
 
 // function login() {
 //   // getDivForms().innerHTML = ''
@@ -196,7 +199,8 @@ function submitUserInfo() {
       username: getUsernameEl().value,
       password_digest: getPasswordEl().value,
       email: getEmailEl().value,
-      location: getLocationEl().value
+      location: getLocationEl().value,
+      profile_photo: 'https://kooledge.com/assets/default_medium_avatar-57d58da4fc778fbd688dcbc4cbc47e14ac79839a9801187e42a796cbd6569847.png'
     }
     let configOptions = {
       method: "POST",
@@ -273,7 +277,7 @@ function showMainContainerDiv(currentUser) {
     pTagTest.innerText = `Welcome to Bromble, ${currentUser.first_name}!`
 
     const cardDiv = document.createElement('div')
-
+    let userCreateAt = currentUser.created_at.split('-')
     cardDiv.innerHTML = `
     <div id='user-card' class="ui card" data-id=${currentUser.id}>
       <div class="ui slide masked reveal image">
@@ -283,7 +287,7 @@ function showMainContainerDiv(currentUser) {
       <div class="content">
         <a class="header">${currentUser.first_name} ${currentUser.last_name}</a>
         <div class="meta">
-          <span class="date">Created in Sep 2014</span>
+          <span class="date">User since ${userCreateAt[1]}/${userCreateAt[2].charAt(0)}${userCreateAt[2].charAt(1)}/${userCreateAt[0]}</span>
         </div>
       </div>
       <div class="extra content">
