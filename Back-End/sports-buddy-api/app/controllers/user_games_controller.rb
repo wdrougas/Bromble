@@ -15,6 +15,11 @@ class UserGamesController < ApplicationController
         render json: user_game.to_json(serialized_data)
       end
 
+      def count
+        games_count = UserGame.where(user_id: params[:id]).count
+        render json: games_count
+      end
+
       private
 
       def strong_user_game_params

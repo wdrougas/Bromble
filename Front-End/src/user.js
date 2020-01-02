@@ -124,7 +124,9 @@ function getCurrentUsername() {
   return document.querySelector('#p-tag-welcome-user').dataset.username
 }
 
-
+function getGameCountATagEl() {
+  return document.querySelector('#games-on-schedule')
+}
 
 
 // function login() {
@@ -294,9 +296,9 @@ function showMainContainerDiv(currentUser) {
         </div>
       </div>
       <div class="extra content">
-        <a>
-          <i class="users icon"></i>
-          2 Members
+        <a id='games-on-schedule'>
+          <i class="calendar alternate outline icon"></i>
+
         </a>
       </div>
     </div>
@@ -320,6 +322,7 @@ function showMainContainerDiv(currentUser) {
     games.forEach(game => renderSingleGame(game, gameList))
     gameColumn.appendChild(gameHeader)
     gameColumn.appendChild(gameList)
+    getGameCount() //this is adding the amount of games a user have on the div card 
   }
 }
 
@@ -329,6 +332,13 @@ function renderSingleGame(game, gameList) {
       let time = game.time.split('-')
       li.innerHTML = `Date: ${time[1]}/${time[2].charAt(0)}${time[2].charAt(1)}/${time[0]} <br> Location: ${game.location} <br> Sport: ${game.sport} <br>`
       gameList.appendChild(li)
+}
+
+function getGameCount() {
+  fetch(getUserGamesURL()+`/count/${getCurrentUserId()}`)
+  .then(res => res.json())
+  .then(userGamesCount => getGameCountATagEl().innerText = userGamesCount + ' Games')
+  .catch(err => console.log(err.message))
 }
 
 function hideGamesSportsDivs() {
