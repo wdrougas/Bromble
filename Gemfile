@@ -10,6 +10,7 @@ gem 'rails', '~> 6.0.1'
 
 # Use pg as the database for Active Record
 gem 'pg'
+gem 'faker'
 
 
 # Use Puma as the app server
