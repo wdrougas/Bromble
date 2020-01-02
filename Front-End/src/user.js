@@ -351,12 +351,14 @@ function renderSingleGame(game, gameList) {
   let time = game.time.split('-')
   if (game.result === null || game.result === 'null') {
     li.innerHTML = `<a href="#" id='game-id-on-a-tag'>Game #${game.id}</a>
+    <p>Game Status: Pending</p>
     <p><i class="calendar alternate outline icon"></i>Date: ${time[1]}/${time[2].charAt(0)}${time[2].charAt(1)}/${time[0]}</p>
     <p>Sport: ${game.sport}</p>
     <p><i class="marker icon"></i>Location: ${game.location}</p>
     <div class="ui divider"></div>`
   } else {
     li.innerHTML = `<a href="#" id='game-id-on-a-tag'>Game #${game.id}</a>
+    <p>Game Status: Completed</p>
     <p><i class="calendar alternate outline icon"></i>Date: ${time[1]}/${time[2].charAt(0)}${time[2].charAt(1)}/${time[0]}</p>
     <p>Sport: ${game.sport}</p>
     <p>Result: ${game.result}</p>
