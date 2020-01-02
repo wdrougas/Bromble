@@ -326,7 +326,7 @@ function showMainContainerDiv(currentUser) {
     getGameCount() //this is adding the amount of games a user have on the div card
     getGameIdOnATagEl().addEventListener('click', function(e) {
       console.log('need to put the values on the form')
-      getScheduleNewGame().style.display = ''
+      editGame()
     })
   }
 }
