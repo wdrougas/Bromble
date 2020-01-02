@@ -128,6 +128,9 @@ function getGameCountATagEl() {
   return document.querySelector('#games-on-schedule')
 }
 
+function getGamesContentDivEl() {
+  return document.querySelector('#div-games-content')
+}
 
 // function login() {
 //   // getDivForms().innerHTML = ''
@@ -296,10 +299,7 @@ function showMainContainerDiv(currentUser) {
         </div>
       </div>
       <div class="extra content">
-        <a id='games-on-schedule'>
-          <i class="calendar alternate outline icon"></i>
-
-        </a>
+        <a id='games-on-schedule'></a>
       </div>
     </div>
     `
@@ -320,18 +320,34 @@ function showMainContainerDiv(currentUser) {
     //   gameList.appendChild(li)
     // })
     games.forEach(game => renderSingleGame(game, gameList))
-    gameColumn.appendChild(gameHeader)
-    gameColumn.appendChild(gameList)
-    getGameCount() //this is adding the amount of games a user have on the div card 
+    getGamesContentDivEl().appendChild(gameHeader)
+    getGamesContentDivEl().appendChild(gameList)
+    gameColumn.append(getGamesContentDivEl())
+    getGameCount() //this is adding the amount of games a user have on the div card
+    getGameIdOnATagEl().addEventListener('click', function(e) {
+      console.log('need to put the values on the form')
+      getScheduleNewGame().style.display = ''
+    })
   }
 }
 
+function getGameIdOnATagEl() {
+  return document.querySelector('#game-id-on-a-tag')
+}
+
 function renderSingleGame(game, gameList) {
-  console.log(game)
-  var li = document.createElement('li');
-      let time = game.time.split('-')
-      li.innerHTML = `Date: ${time[1]}/${time[2].charAt(0)}${time[2].charAt(1)}/${time[0]} <br> Location: ${game.location} <br> Sport: ${game.sport} <br>`
-      gameList.appendChild(li)
+  // console.log(game)
+  let li = document.createElement('li')
+  li.dataset.id = game.id
+  let time = game.time.split('-')
+  li.innerHTML = `<a href="#" id='game-id-on-a-tag'>Game #${game.id}</a>
+  <p><i class="calendar alternate outline icon"></i>Date: ${time[1]}/${time[2].charAt(0)}${time[2].charAt(1)}/${time[0]}</p>
+  <p>Sport: ${game.sport}</p>
+  <p><i class="marker icon"></i>Location: ${game.location}</p>
+  <div class="ui divider"></div>`
+  // li.innerHTML = `Date: ${time[1]}/${time[2].charAt(0)}${time[2].charAt(1)}/${time[0]} <br> Location: ${game.location} <br> Sport: ${game.sport} <br>`
+  li.classList.add('ui', 'list')
+  gameList.appendChild(li)
 }
 
 function getGameCount() {
