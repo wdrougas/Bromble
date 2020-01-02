@@ -349,7 +349,7 @@ function renderSingleGame(game, gameList) {
   let li = document.createElement('li')
   li.dataset.id = game.id
   let time = game.time.split('-')
-  if (game.result === null || game.result === 'null') {
+  if (game.result === 'none') {
     li.innerHTML = `<a href="#" id='game-id-on-a-tag'>Game #${game.id}</a>
     <p>Game Status: Pending</p>
     <p><i class="calendar alternate outline icon"></i>Date: ${time[1]}/${time[2].charAt(0)}${time[2].charAt(1)}/${time[0]}</p>

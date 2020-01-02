@@ -52,6 +52,7 @@ function getGameForm() {
 }
 
 function editGame(e) {
+  
   let gameID = e.target.parentElement.dataset.id
   let editGameDiv = document.createElement('div')
   editGameDiv.id = 'game-edit-form-div'
