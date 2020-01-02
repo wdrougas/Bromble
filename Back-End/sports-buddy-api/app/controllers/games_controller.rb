@@ -14,6 +14,13 @@ class GamesController < ApplicationController
     render json: game.to_json(serialized_data)
   end
 
+  def update
+    game = Game.find(params[:id])
+    game.update(result: params[:result])
+    byebug
+  end
+
+
   private
 
     def strong_game_params

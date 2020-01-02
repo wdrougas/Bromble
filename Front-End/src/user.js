@@ -324,15 +324,24 @@ function showMainContainerDiv(currentUser) {
     getGamesContentDivEl().appendChild(gameList)
     gameColumn.append(getGamesContentDivEl())
     getGameCount() //this is adding the amount of games a user have on the div card
-    getGameIdOnATagEl().addEventListener('click', function(e) {
-      console.log('need to put the values on the form')
-      editGame()
-    })
+    getGameIdOnATagEl().forEach(tag => addEventListener(tag))
+    // getGameIdOnATagEl().addEventListener('click', function(e) {
+    //   console.log('need to put the values on the form')
+    //   editGame()
+    // })
   }
 }
 
+function addEventListener(tag) {
+  tag.addEventListener('click', function(e) {
+    console.log('need to put the values on the form')
+    editGame(e)
+  })
+}
+
+
 function getGameIdOnATagEl() {
-  return document.querySelector('#game-id-on-a-tag')
+  return document.querySelectorAll('#game-id-on-a-tag')
 }
 
 function renderSingleGame(game, gameList) {
@@ -340,11 +349,21 @@ function renderSingleGame(game, gameList) {
   let li = document.createElement('li')
   li.dataset.id = game.id
   let time = game.time.split('-')
-  li.innerHTML = `<a href="#" id='game-id-on-a-tag'>Game #${game.id}</a>
-  <p><i class="calendar alternate outline icon"></i>Date: ${time[1]}/${time[2].charAt(0)}${time[2].charAt(1)}/${time[0]}</p>
-  <p>Sport: ${game.sport}</p>
-  <p><i class="marker icon"></i>Location: ${game.location}</p>
-  <div class="ui divider"></div>`
+  if (game.result === null || game.result === 'null') {
+    li.innerHTML = `<a href="#" id='game-id-on-a-tag'>Game #${game.id}</a>
+    <p><i class="calendar alternate outline icon"></i>Date: ${time[1]}/${time[2].charAt(0)}${time[2].charAt(1)}/${time[0]}</p>
+    <p>Sport: ${game.sport}</p>
+    <p><i class="marker icon"></i>Location: ${game.location}</p>
+    <div class="ui divider"></div>`
+  } else {
+    li.innerHTML = `<a href="#" id='game-id-on-a-tag'>Game #${game.id}</a>
+    <p><i class="calendar alternate outline icon"></i>Date: ${time[1]}/${time[2].charAt(0)}${time[2].charAt(1)}/${time[0]}</p>
+    <p>Sport: ${game.sport}</p>
+    <p>Result: ${game.result}</p>
+    <p><i class="marker icon"></i>Location: ${game.location}</p>
+    <div class="ui divider"></div>`
+  }
+
   // li.innerHTML = `Date: ${time[1]}/${time[2].charAt(0)}${time[2].charAt(1)}/${time[0]} <br> Location: ${game.location} <br> Sport: ${game.sport} <br>`
   li.classList.add('ui', 'list')
   gameList.appendChild(li)

@@ -51,54 +51,42 @@ function getGameForm() {
   return document.getElementById('form-create-game')
 }
 
-function editGame() {
+function editGame(e) {
+  let gameID = e.target.parentElement.dataset.id
   let editGameDiv = document.createElement('div')
   editGameDiv.id = 'game-edit-form-div'
-  editGameDiv.innerHTML = `<h2>Schedule New Game!</h2>
-  <form id='form-edit-game' class='ui form' action='#' method='post'>
-    <div class='field'>
-      <label>Location</label>
-      <input id="game-location-field" type='number' name='location' placeholder='Location' max='99999' min='09999' size="5"required>
-    </div>
-    <div class='field'>
-      <label>Date</label>
-      <input id="game-time-field" type='date' name='time' placeholder='Time' required>
-    </div>
-    <div class='field'>
-      <label>Sport</label>
-      <select class ='ui fluid dropdown' id='sport-select'>
-      <option value ='sports'>Sport</option>
-      <option value ='Tennis'>Tennis</option>
-      <option value ='Table Tennis'>Table Tennis</option>
-      <option value ='Basketball'>Basketball</option>
-      <option value ='Golf'>Golf</option>
-      <option value ='Running'>Running</option>
-      <input id="game-sport-field" type='hidden' name='sport' placeholder='Sport' required>
-      </select>
-    </div>
+  editGameDiv.dataset.id = gameID
+  editGameDiv.innerHTML = `<h2>Submit Result</h2>
+  <form id='form-edit-game' class='ui form' action='#' method='patch'>
     <div class='field'>
       <label>Result</label>
       <input id="game-result-field" type='text' name='result' value='0-0' required>
     </div>
-    <!-- begin add dropdown with search for user -->
-    <div class='field' id='user-dropdown'>
-      <label>Users</label>
-      <select class ='ui fluid dropdown' id='user-select'>
-        <option value ='users'>Users</option>
-        <input id="game-user-field" type='hidden' name='user' placeholder='User' required>
-      </select>
-    </div>
-
-    <button id='submit-new-game' class='ui button' type='submit'>Submit</button>
+    <button id='submit-result' class='ui button' type='submit'>Submit Result</button>
   </form>`
-  getUsers()
+  // getUsers()
   getColumn3Div().append(editGameDiv)
   let formEditGame = document.querySelector('#form-edit-game')
   formEditGame.addEventListener('submit', function(e) {
     e.preventDefault()
-    submitGameInfo()
+    submitResult(e)
   })
 }
+
+function submitResult(e) {
+  let gameID = e.target.parentElement.dataset.id
+  let gameScore = {result: getGameResultEl().value}
+  let configOptions = {
+    method: 'PATCH',
+    headers: getHeaders(),
+    body: JSON.stringify(gameScore)
+  }
+  fetch(getGamesURL()+`/${gameID}`, configOptions)
+  .then(res => res.json())
+  .then(res => console.log(res))
+}
+
+
 function createGame() {
   let createGameDiv = document.createElement('div')
   createGameDiv.id = 'game-form-div'
